@@ -7,7 +7,7 @@ import GoodReadsFactory from "./factories/goodReadsFactory";
 import InteractionFactory from "./factories/interactionFactory";
 
 // Helpers
-import { findCategory } from "./helpers/category";
+import { Category, findCategoryDetails } from "./helpers/category";
 
 
 async function prepareApplication() {
@@ -17,7 +17,7 @@ async function prepareApplication() {
     });
 }
 
-async function goodReadsJobs(browser: Browser) {
+async function goodReadsJobs(browser: Browser): Promise<Category> {
     try {
         const goodReads = new GoodReadsFactory(browser);
         const categories = await goodReads.fetchCategories();
@@ -25,7 +25,7 @@ async function goodReadsJobs(browser: Browser) {
         const interactionFactory = new InteractionFactory();
         const category = await interactionFactory.askForCategory(categories);
 
-        return findCategory(category.name, categories);
+        return findCategoryDetails(category.name, categories);
     } catch (e) {
         throw e;
     }

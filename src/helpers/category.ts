@@ -11,7 +11,7 @@ export interface Category {
  * @param categoryName
  * @param categories
  */
-export function findCategory(categoryName: string, categories: Category[]): Category {
+export function findCategoryDetails(categoryName: string, categories: Category[]): Category {
     const category = categories.find((category) => category.name === categoryName);
     if (category) {
         return category;
